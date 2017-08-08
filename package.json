@@ -1,0 +1,25 @@
+{
+  "name": "image-ascii",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "ansi-to-html": "^0.6.3",
+    "ansispan": "0.0.4",
+    "body-parser": "~1.17.1",
+    "colors": "^1.1.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "image-to-ascii": "^3.0.7",
+    "jade": "~1.11.0",
+    "morgan": "~1.8.1",
+    "multer": "^1.3.0",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "express-log2response": "^0.10.1"
+  }
+}

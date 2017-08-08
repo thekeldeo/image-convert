@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Convert anh to ascii</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+    <button class="btn btn-primary" type="file" name="userPhoto" class="button" ngf-select="upload($file)" value="Upload on file select">Upload</button>
+    <br>
+    <input type="text" ng-model="url" placeholder="Hoặc nhập url Ảnh">
+
+    <button ng-click="submitT()">SUBMIT</button>
+
+    <pre style="background: #000; color: #fff" ng-bind-html="trustedHtml"></pre>
+    <script src="./ng-file-upload/ng-file-upload.js"></script>
+</div>
+
+<script>
+    var app = angular.module('myApp', ['ngFileUpload']);
+    app.controller('myCtrl', function($scope, $http, $sce, Upload) {
+        $scope.url= '';
+        $scope.submitT = function () {
+            if($scope.url) {
+                $http.get("/image?url=" + $scope.url)
+                    .then(function(response) {
+                        if(!response.data.status) {
+                            alert('url ko dung');
+                        }
+                        else {
+                            $scope.trustedHtml = $sce.trustAsHtml(response.data.data);
+                        }
+                    });
+            }
+        };
+
+        $scope.upload = function (file) {
+
+            Upload.upload({
+                url: '/post-img',
+                arrayKey: '',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: {file: file}
+            }).then(function (response) {
+                if(!response.data.status) {
+                    alert('url ko dung');
+                }
+                else {
+                    $scope.trustedHtml = $sce.trustAsHtml(response.data.data);
+                }
+            });
+        }
+
+    });
+</script>
+
+</body>
+</html>
