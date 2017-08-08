@@ -68,4 +68,8 @@ app.post('/post-img', function (req, res) {
     });
 });
 
+app.listen(4567, function () {
+    console.log('app start at 4567');
+})
+
 module.exports = app;
